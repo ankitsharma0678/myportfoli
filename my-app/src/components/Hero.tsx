@@ -14,7 +14,6 @@ import {
   Zap,
   Code2,
   GitBranch,
-  ShieldCheck,
 } from "lucide-react";
 
 export const Hero: React.FC = () => {
@@ -143,7 +142,7 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-          className="mt-14 w-full grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl"
+          className="mt-14 w-full grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl"
         >
           {[
             {
@@ -153,14 +152,6 @@ export const Hero: React.FC = () => {
               icon: Code2,
               accent: "text-purple-400",
               borderGlow: "group-hover:border-purple-500/40",
-            },
-            {
-              value: "2+ Years",
-              label: "Tech & Coding Exp",
-              detail: "Web Development & Trainee",
-              icon: ShieldCheck,
-              accent: "text-cyan-400",
-              borderGlow: "group-hover:border-cyan-500/40",
             },
             {
               value: "200+",
