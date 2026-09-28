@@ -51,7 +51,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 349,
     rating: 4.9,
     reviewsCount: 142,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80",
     badge: "Bestseller",
     description: "Spatial audio with active hybrid noise cancellation and 40-hour battery life.",
     inStock: true,
@@ -64,7 +64,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 399,
     rating: 4.8,
     reviewsCount: 98,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
     badge: "New Release",
     description: "Titanium casing with AMOLED display, ECG monitoring, and dual-frequency GPS.",
     inStock: true,
@@ -77,7 +77,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 219,
     rating: 4.9,
     reviewsCount: 210,
-    image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&auto=format&fit=crop&q=80",
     badge: "Hot Deal",
     description: "Hot-swappable tactile switches, per-key RGB backlighting, and gasket-mount dampening.",
     inStock: true,
@@ -90,7 +90,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 229,
     rating: 4.7,
     reviewsCount: 86,
-    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&auto=format&fit=crop&q=80",
     badge: "20% OFF",
     description: "Ultra-compact true wireless earbuds with transparent audio mode and wireless charging case.",
     inStock: true,
@@ -103,7 +103,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 109,
     rating: 4.8,
     reviewsCount: 164,
-    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800&auto=format&fit=crop&q=80",
     description: "Ergonomic 26K DPI optical sensor with silent magnetic scroll wheel and Bluetooth 5.3.",
     inStock: true,
   },
@@ -115,7 +115,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 799,
     rating: 5.0,
     reviewsCount: 54,
-    image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800&auto=format&fit=crop&q=80",
     badge: "Premium",
     description: "Ultrawide 175Hz QD-OLED display with 0.03ms response time and HDR1000 brightness.",
     inStock: true,
@@ -128,7 +128,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 89,
     rating: 4.6,
     reviewsCount: 112,
-    image: "https://images.unsplash.com/photo-1622445268465-843857458631?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&auto=format&fit=crop&q=80",
     description: "15W fast magnetic charging station for iPhone, Watch, and wireless earbuds simultaneously.",
     inStock: true,
   },
@@ -140,12 +140,55 @@ const PRODUCTS: Product[] = [
     originalPrice: 129,
     rating: 4.9,
     reviewsCount: 175,
-    image: "https://images.unsplash.com/photo-1609592424074-b529aa878a87?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=800&auto=format&fit=crop&q=80",
     badge: "Essential",
     description: "High-capacity power bank with dual USB-C Power Delivery to fast-charge laptops on the go.",
     inStock: true,
   },
 ];
+
+function ProductImage({ src, alt }: { src: string; alt: string }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return (
+      <div className="h-full w-full bg-gradient-to-br from-violet-950/60 via-slate-900 to-cyan-950/60 flex flex-col items-center justify-center p-4 text-center">
+        <Zap className="h-8 w-8 text-violet-400 mb-1 opacity-80" />
+        <span className="text-[11px] font-mono text-slate-300 font-semibold line-clamp-1">{alt}</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt=""
+      onError={() => setHasError(true)}
+      className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+    />
+  );
+}
+
+function CartItemImage({ src, alt }: { src: string; alt: string }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return (
+      <div className="h-14 w-14 rounded-lg bg-slate-800 flex items-center justify-center text-slate-500 shrink-0">
+        <ShoppingBag className="h-6 w-6 text-violet-400" />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt=""
+      onError={() => setHasError(true)}
+      className="h-14 w-14 rounded-lg object-cover bg-slate-800 shrink-0"
+    />
+  );
+}
 
 const CATEGORIES = ["All", "Electronics", "Wearables", "Audio", "Accessories"] as const;
 
@@ -403,11 +446,7 @@ export default function EcommercePage() {
             >
               {/* Product Thumbnail Container */}
               <div className="relative h-48 w-full bg-slate-900 overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                />
+                <ProductImage src={product.image} alt={product.name} />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
 
                 {/* Badge Overlay */}
@@ -513,11 +552,7 @@ export default function EcommercePage() {
                   key={product.id}
                   className="flex items-center gap-3 p-3 rounded-xl bg-slate-950/80 border border-slate-800"
                 >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="h-14 w-14 rounded-lg object-cover bg-slate-800"
-                  />
+                  <CartItemImage src={product.image} alt={product.name} />
                   <div className="flex-1 min-w-0">
                     <h4 className="text-xs font-bold text-white truncate">{product.name}</h4>
                     <span className="text-xs font-mono text-violet-300">${product.price}</span>

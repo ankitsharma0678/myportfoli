@@ -13,24 +13,86 @@ import {
   Globe,
   Radio,
   FileCode,
-  CheckCircle2,
   Boxes,
   Zap,
+  Lock,
+  Workflow,
+  Bot,
+  BrainCircuit,
+  Share2,
+  Layout,
+  Binary,
+  ShieldCheck,
+  GitBranch,
+  Sliders,
 } from "lucide-react";
 
-interface SkillItem {
+export type SkillCategory =
+  | "frameworks"
+  | "languages"
+  | "databases"
+  | "vector_db"
+  | "integration"
+  | "tools"
+  | "core"
+  | "security"
+  | "ai_automation";
+
+export interface SkillItem {
   name: string;
-  category: "languages" | "frameworks" | "databases" | "tools";
+  category: SkillCategory;
   level: string;
   percentage: number;
   icon: React.ComponentType<{ className?: string }>;
   tag: string;
-  accent: "purple" | "cyan" | "pink" | "amber";
+  accent: "purple" | "cyan" | "pink" | "amber" | "emerald";
   description: string;
 }
 
 const skillsData: SkillItem[] = [
-  // Languages
+  // 1. Frameworks & Libraries
+  {
+    name: "React.js",
+    category: "frameworks",
+    level: "Expert",
+    percentage: 96,
+    icon: Layers,
+    tag: "Hooks / Context API / State",
+    accent: "cyan",
+    description: "Custom hooks, component architecture, state management, memoization, and virtual DOM efficiency.",
+  },
+  {
+    name: "Next.js",
+    category: "frameworks",
+    level: "Advanced",
+    percentage: 92,
+    icon: Globe,
+    tag: "App Router / SSR / CSR",
+    accent: "cyan",
+    description: "Server-side rendering, dynamic API routes, SEO optimization, and static site generation.",
+  },
+  {
+    name: "Node.js & Express.js",
+    category: "frameworks",
+    level: "Advanced",
+    percentage: 90,
+    icon: Server,
+    tag: "REST APIs / Middleware / Routing",
+    accent: "cyan",
+    description: "Scalable backend routing, asynchronous event loops, middleware pipelines, and auth integration.",
+  },
+  {
+    name: "Bootstrap, Flexbox & CSS Grid",
+    category: "frameworks",
+    level: "Expert",
+    percentage: 95,
+    icon: Layout,
+    tag: "Responsive Layouts / Styling",
+    accent: "cyan",
+    description: "Pixel-perfect responsive UIs, flex layout alignment, custom grid systems, and adaptive design.",
+  },
+
+  // 2. Languages
   {
     name: "JavaScript (ES6+)",
     category: "languages",
@@ -39,7 +101,7 @@ const skillsData: SkillItem[] = [
     icon: Code2,
     tag: "Async/Await / Closures / DOM",
     accent: "purple",
-    description: "Modern JavaScript, event loop, functional programming, and asynchronous data flows.",
+    description: "Modern ES6+ syntax, asynchronous event loop, promises, closures, and DOM manipulation.",
   },
   {
     name: "TypeScript",
@@ -49,7 +111,7 @@ const skillsData: SkillItem[] = [
     icon: FileCode,
     tag: "Static Typing / Interfaces",
     accent: "purple",
-    description: "Type-safe architectures, interface declarations, generics, and strict compile checking.",
+    description: "Type-safe architectures, custom interface declarations, generics, and strict compile checking.",
   },
   {
     name: "Python",
@@ -57,9 +119,9 @@ const skillsData: SkillItem[] = [
     level: "Proficient",
     percentage: 85,
     icon: Terminal,
-    tag: "Data Structures / Automation",
+    tag: "Scripting / Data / AI",
     accent: "purple",
-    description: "Core algorithms, scripting, backend logic, and AI model integrations.",
+    description: "Core scripting, automated data processing pipelines, backend services, and AI integrations.",
   },
   {
     name: "HTML5 & CSS3",
@@ -67,63 +129,21 @@ const skillsData: SkillItem[] = [
     level: "Expert",
     percentage: 98,
     icon: Globe,
-    tag: "Semantic / Accessible",
+    tag: "Semantic / Accessibility",
     accent: "purple",
-    description: "Semantic layouts, responsive viewport design, cross-browser compatibility, and CSS animations.",
+    description: "Semantic HTML structure, accessible UX design, keyframe animations, and cross-browser styling.",
   },
 
-  // Frameworks & Libraries
-  {
-    name: "React.js",
-    category: "frameworks",
-    level: "Expert",
-    percentage: 96,
-    icon: Layers,
-    tag: "Hooks / Context API / State",
-    accent: "cyan",
-    description: "Custom hooks, component lifecycle, memoization (useMemo/useCallback), and virtual DOM.",
-  },
-  {
-    name: "Next.js 14",
-    category: "frameworks",
-    level: "Advanced",
-    percentage: 92,
-    icon: Globe,
-    tag: "App Router / SSR / CSR",
-    accent: "cyan",
-    description: "Server-side rendering, dynamic API routes, SEO optimization, and high performance.",
-  },
-  {
-    name: "Node.js & Express.js",
-    category: "frameworks",
-    level: "Advanced",
-    percentage: 90,
-    icon: Server,
-    tag: "REST APIs / Middleware",
-    accent: "cyan",
-    description: "Scalable backend routing, middleware pipelines, authentication, and HTTP status handling.",
-  },
-  {
-    name: "Tailwind CSS & Bootstrap",
-    category: "frameworks",
-    level: "Expert",
-    percentage: 96,
-    icon: Sparkles,
-    tag: "Modern Glass / Flexbox / Grid",
-    accent: "cyan",
-    description: "Rapid UI prototyping, custom utility classes, responsive grid systems, and dark theme design.",
-  },
-
-  // Databases & Core Concepts
+  // 3. Databases
   {
     name: "MongoDB",
     category: "databases",
     level: "Advanced",
     percentage: 90,
     icon: Database,
-    tag: "NoSQL / Mongoose / CRUD",
+    tag: "NoSQL / Mongoose / Aggregation",
     accent: "pink",
-    description: "Document data modeling, aggregation pipelines, schema validation, and fast query execution.",
+    description: "Document data modeling, schema validation, Mongoose ORM, and complex aggregation pipelines.",
   },
   {
     name: "SQL",
@@ -133,49 +153,97 @@ const skillsData: SkillItem[] = [
     icon: Database,
     tag: "Relational Queries / Joins",
     accent: "pink",
-    description: "Relational table schemas, structured queries, primary/foreign keys, and data normalization.",
+    description: "Relational database schemas, structured query design, multi-table joins, and data normalization.",
+  },
+
+  // 4. Vector Databases
+  {
+    name: "Vector Databases",
+    category: "vector_db",
+    level: "Advanced",
+    percentage: 87,
+    icon: Binary,
+    tag: "Pinecone / Qdrant / Chroma",
+    accent: "pink",
+    description: "High-dimensional vector indexing, similarity search algorithms, embeddings storage, and vector retrieval.",
+  },
+
+  // 5. Automation & AI
+  {
+    name: "n8n Automation",
+    category: "ai_automation",
+    level: "Advanced",
+    percentage: 92,
+    icon: Workflow,
+    tag: "Workflows / Webhooks / Fallbacks",
+    accent: "cyan",
+    description: "Automated multi-step workflows, HTTP request nodes, custom webhook triggers, and error recovery.",
   },
   {
-    name: "RESTful API Architecture",
-    category: "databases",
+    name: "LLM APIs & Prompt Engineering",
+    category: "ai_automation",
+    level: "Advanced",
+    percentage: 90,
+    icon: Bot,
+    tag: "OpenAI / Anthropic / Ollama",
+    accent: "cyan",
+    description: "Generative AI API integration (OpenAI, Anthropic, Hugging Face, Ollama), prompt tuning, and structured outputs.",
+  },
+  {
+    name: "RAG Pipelines",
+    category: "ai_automation",
+    level: "Advanced",
+    percentage: 88,
+    icon: BrainCircuit,
+    tag: "Retrieval-Augmented Generation",
+    accent: "cyan",
+    description: "Knowledge base embedding generation, contextual vector search retrieval, and grounded AI responses.",
+  },
+
+  // 6. Integration
+  {
+    name: "RESTful APIs & Webhooks",
+    category: "integration",
     level: "Expert",
     percentage: 94,
     icon: Radio,
-    tag: "Endpoints / JSON / Postman",
-    accent: "pink",
-    description: "Designing, integrating, testing, and debugging REST endpoints with predictable error handling.",
+    tag: "Endpoints / Webhooks / JSON",
+    accent: "emerald",
+    description: "Designing, consuming, and testing RESTful API endpoints, real-time webhooks, and HTTP status handling.",
   },
   {
-    name: "Data Structures & OOP",
-    category: "databases",
+    name: "JSON & System Integration",
+    category: "integration",
     level: "Advanced",
-    percentage: 89,
-    icon: Cpu,
-    tag: "Algorithms / Problem Solving",
-    accent: "pink",
-    description: "Arrays, Linked Lists, Trees, Stacks, Queues, Object-Oriented Design, and algorithmic efficiency.",
+    percentage: 92,
+    icon: Share2,
+    tag: "API Wiring / Data Exchange",
+    accent: "emerald",
+    description: "Cross-platform data transformation, third-party API wiring, payload validation, and system integration.",
   },
 
-  // Tools & Platforms
+  // 7. Security & Governance
+  {
+    name: "Security & Governance",
+    category: "security",
+    level: "Advanced",
+    percentage: 88,
+    icon: ShieldCheck,
+    tag: "Data Privacy / Access Control",
+    accent: "emerald",
+    description: "Data privacy compliance, role-based access control (RBAC), security headers, and safe data flow design.",
+  },
+
+  // 8. Tools & Platforms
   {
     name: "Git & GitHub",
     category: "tools",
     level: "Expert",
     percentage: 94,
-    icon: Boxes,
-    tag: "Version Control / CI",
+    icon: GitBranch,
+    tag: "Version Control / Workflow",
     accent: "amber",
-    description: "Branching strategies, pull requests, merge conflict resolution, and open source collaboration.",
-  },
-  {
-    name: "Postman & API Testing",
-    category: "tools",
-    level: "Expert",
-    percentage: 95,
-    icon: Zap,
-    tag: "Payload Validation / Testing",
-    accent: "amber",
-    description: "API testing suites, environment variables, response inspection, and mock servers.",
+    description: "Branching strategies, pull request code reviews, conflict resolution, and collaborative repositories.",
   },
   {
     name: "VS Code & Chrome DevTools",
@@ -185,16 +253,60 @@ const skillsData: SkillItem[] = [
     icon: Terminal,
     tag: "Debugging / Performance Profiling",
     accent: "amber",
-    description: "DOM inspection, network waterfall analysis, memory profiling, and modern extensions.",
+    description: "DOM tree inspection, network waterfall timing, breakpoint debugging, and performance profiling.",
+  },
+  {
+    name: "npm & Postman",
+    category: "tools",
+    level: "Expert",
+    percentage: 95,
+    icon: Zap,
+    tag: "Package Mgmt / API Testing",
+    accent: "amber",
+    description: "Automated API request testing, environment variable suites, mock servers, and package dependencies.",
+  },
+
+  // 9. Core Concepts
+  {
+    name: "Data Structures & Algorithms",
+    category: "core",
+    level: "Advanced",
+    percentage: 89,
+    icon: Cpu,
+    tag: "Trees / Graphs / Optimization",
+    accent: "purple",
+    description: "Fundamental data structures, time & space complexity, recursion, and algorithmic problem solving.",
+  },
+  {
+    name: "OOP & Web Performance",
+    category: "core",
+    level: "Advanced",
+    percentage: 91,
+    icon: Sliders,
+    tag: "Object-Oriented / Speed",
+    accent: "purple",
+    description: "Object-Oriented principles, code reusability, asset optimization, lazy loading, and web vitals.",
   },
 ];
 
 export const Skills: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<"all" | "languages" | "frameworks" | "databases" | "tools">("all");
+  const [activeTab, setActiveTab] = useState<
+    | "all"
+    | "frameworks"
+    | "languages"
+    | "databases"
+    | "ai_automation"
+    | "integration"
+    | "security"
+    | "tools"
+    | "core"
+  >("all");
 
-  const filteredSkills = skillsData.filter((skill) =>
-    activeTab === "all" ? true : skill.category === activeTab
-  );
+  const filteredSkills = skillsData.filter((skill) => {
+    if (activeTab === "all") return true;
+    if (activeTab === "databases") return skill.category === "databases" || skill.category === "vector_db";
+    return skill.category === activeTab;
+  });
 
   return (
     <section id="skills" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -205,31 +317,34 @@ export const Skills: React.FC = () => {
       <div className="flex flex-col items-center text-center mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono uppercase tracking-wider mb-3">
           <Cpu className="w-3.5 h-3.5" />
-          <span>Technical Expertise</span>
+          <span>Technical Skills & Arsenal</span>
         </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-          Skills & <span className="gradient-text-cyan">Tech Arsenal</span>
+          Technical <span className="gradient-text-cyan">Skillset & Stack</span>
         </h2>
         <p className="mt-3 text-zinc-400 max-w-2xl text-sm sm:text-base">
-          Proven proficiency across modern frontend engineering, backend API development,
-          database design, and developer tools.
+          Comprehensive technical skills across Web Engineering, AI & Automation, Vector Databases, Security, and System Integration.
         </p>
 
         {/* Filter Tabs */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full bg-[#0d0e17] border border-white/10 backdrop-blur-xl">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-[#0d0e17] border border-white/10 backdrop-blur-xl">
           {[
             { id: "all", label: "All Skills" },
-            { id: "frameworks", label: "React & Frameworks" },
-            { id: "languages", label: "Core Languages" },
-            { id: "databases", label: "Databases & APIs" },
+            { id: "frameworks", label: "Frameworks & Libs" },
+            { id: "languages", label: "Languages" },
+            { id: "databases", label: "Databases & Vector DBs" },
+            { id: "ai_automation", label: "Automation & AI" },
+            { id: "integration", label: "Integration & APIs" },
+            { id: "security", label: "Security & Governance" },
             { id: "tools", label: "Tools & Platforms" },
+            { id: "core", label: "Core Concepts" },
           ].map((tab) => {
             const isSelected = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`relative px-4 py-2 rounded-full text-xs font-medium transition-all ${
+                className={`relative px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
                   isSelected
                     ? "text-white font-semibold"
                     : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
@@ -238,7 +353,7 @@ export const Skills: React.FC = () => {
                 {isSelected && (
                   <motion.div
                     layoutId="activeSkillTab"
-                    className="absolute inset-0 bg-gradient-to-r from-purple-600/40 via-indigo-600/40 to-cyan-600/40 border border-purple-500/50 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                    className="absolute inset-0 bg-gradient-to-r from-purple-600/40 via-indigo-600/40 to-cyan-600/40 border border-purple-500/50 rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.3)]"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -282,6 +397,13 @@ export const Skills: React.FC = () => {
                 bar: "bg-gradient-to-r from-amber-500 to-orange-600",
                 icon: "text-amber-400 bg-amber-500/10 border-amber-500/20",
                 glow: "group-hover:shadow-[0_0_30px_rgba(245,158,11,0.2)]",
+              },
+              emerald: {
+                border: "group-hover:border-emerald-500/40",
+                badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20",
+                bar: "bg-gradient-to-r from-emerald-500 to-teal-600",
+                icon: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+                glow: "group-hover:shadow-[0_0_30px_rgba(16,185,129,0.2)]",
               },
             }[skill.accent];
 
@@ -340,3 +462,4 @@ export const Skills: React.FC = () => {
     </section>
   );
 };
+
